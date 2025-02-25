@@ -2,6 +2,7 @@ package com.joaobarbosadev.WolfManage.core.models;
 
 import com.fasterxml.jackson.databind.PropertyNamingStrategies;
 import com.fasterxml.jackson.databind.annotation.JsonNaming;
+import com.joaobarbosadev.WolfManage.core.abstractions.Auditable;
 import jakarta.persistence.*;
 import lombok.*;
 
@@ -11,10 +12,11 @@ import lombok.*;
 @NoArgsConstructor
 @AllArgsConstructor
 @Table(name = "clientes")
-@EqualsAndHashCode(onlyExplicitlyIncluded = true)
+@EqualsAndHashCode(onlyExplicitlyIncluded = true, callSuper = false)
 @JsonNaming(PropertyNamingStrategies.SnakeCaseStrategy.class)
-public class Client {
+public class Client extends Auditable {
     @Id
+    @EqualsAndHashCode.Include
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     @Column(name = "nome")
