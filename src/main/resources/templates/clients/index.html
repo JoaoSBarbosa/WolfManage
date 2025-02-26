@@ -1,0 +1,52 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Wolf Manage - Clientes</title>
+    <!--    Framework PICOCSS-->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@picocss/pico@1.5.10/css/pico.min.css">
+</head>
+<body>
+<nav class="container-fluid">
+    <ul>
+        <li><strong>Wolf Manage - </strong></li>
+    </ul>
+    <ul>
+        <li><a href="#">Home</a></li>
+    </ul>
+</nav>
+<main class="container">
+    <h1>Lista de Clientes!</h1>
+    <table>
+        <thead>
+        <tr>
+            <th scope="col">#</th>
+            <th scope="col">Nome</th>
+            <th scope="col">E-mail</th>
+            <th scope="col">Telefone</th>
+            <th scope="col">Cidade</th>
+            <th scope="col">Bairro</th>
+            <th scope="col">Rua</th>
+            <th scope="col">Nº</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="client : ${clients}">
+            <th scope="row" th:text="${client.id}">1</th>
+            <td th:text="${client.name}">João</td>
+            <td th:text="${client.email}">contato@barbosacode.com</td>
+            <td th:text="${client.phone}">(11) 9 99453-7464</td>
+            <td th:text="${client.city}">Itaquaquecetuba</td>
+            <td th:text="${client.neighbourhood}">Jardim Itapuã</td>
+            <td th:text="${client.address}">Av. Industrial Primeira</td>
+            <td th:text="${client.addressNumber}">103</td>
+        </tr>
+        </tbody>
+    </table>
+    <a href="/" role="button">Novo cliente</a>
+</main>
+</body>
+</html>

@@ -27,6 +27,8 @@ public class Client extends Auditable {
     private String phone;
     @Column(name = "endereco")
     private String address;
+    @Column(name = "numero_endereco")
+    private String addressNumber;
     @Column(name = "cidade")
     private String city;
     @Column(name = "uf", length = 2)
