@@ -1,6 +1,7 @@
 package com.joaobarbosadev.WolfManage.web.client.mappers;
 
 import com.joaobarbosadev.WolfManage.core.models.Client;
+import com.joaobarbosadev.WolfManage.web.client.dtos.ClientForm;
 import com.joaobarbosadev.WolfManage.web.client.dtos.ClientViewModel;
 import org.springframework.stereotype.Component;
 
@@ -22,5 +23,24 @@ public class ClientMapperImpl implements ClientMapper {
         clientViewModel.setAddressNumber(client.getAddressNumber());
         clientViewModel.setPhone(client.getPhone());
         return clientViewModel;
+    }
+
+    @Override
+    public Client toClient(ClientForm form) {
+        if(form == null) return null;
+
+        return Client.builder()
+                .email(form.getEmail())
+                .name(form.getName())
+                .city(form.getCity())
+                .state(form.getState())
+                .neighbourhood(form.getNeighbourhood())
+                .address(form.getAddress())
+                .addressNumber(form.getAddressNumber())
+                .phone(form.getPhone())
+                .country(form.getCountry())
+                .build();
+
+
     }
 }
