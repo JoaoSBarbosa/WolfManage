@@ -2,6 +2,7 @@ package com.joaobarbosadev.WolfManage.core.services;
 
 import com.joaobarbosadev.WolfManage.core.models.Client;
 import com.joaobarbosadev.WolfManage.core.repositories.ClientRepository;
+import com.joaobarbosadev.WolfManage.web.client.dtos.ClientForm;
 import com.joaobarbosadev.WolfManage.web.client.dtos.ClientViewModel;
 import com.joaobarbosadev.WolfManage.web.client.mappers.ClientMapper;
 import lombok.RequiredArgsConstructor;
@@ -29,5 +30,12 @@ public class ClientServiceImpl implements ClientService {
         var clients = clientRepository.findAll();
         return clients.stream().map(clientMapper::toClientViewModel).collect(Collectors.toList());
 
+    }
+
+    @Override
+    @Transactional
+    public ClientViewModel save(ClientForm form) {
+        Client client = clientMapper.toClient(form);
+        return clientMapper.toClientViewModel(clientRepository.save(client));
     }
 }
