@@ -1,6 +1,7 @@
 package com.joaobarbosadev.WolfManage.web.client.controllers;
 
 import com.joaobarbosadev.WolfManage.core.enums.Country;
+import com.joaobarbosadev.WolfManage.core.enums.States;
 import com.joaobarbosadev.WolfManage.core.models.Client;
 import com.joaobarbosadev.WolfManage.core.repositories.ClientRepository;
 import com.joaobarbosadev.WolfManage.core.services.ClientService;
@@ -9,12 +10,13 @@ import lombok.Getter;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
+import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
 import java.util.Map;
 
-@RestController
+@Controller
 @RequiredArgsConstructor
 @RequestMapping("/clients")
 public class ClientController {
@@ -38,12 +40,13 @@ public class ClientController {
                 "Avenida Industrial primeira",
                 "52",
                 "São Paulo",
-                "SP",
+                States.SP,
                 "Vila Prudente",
                 Country.BRAZIL
         );
-        var model = Map.of("clientForm", clientForm);
-        return new ModelAndView("clients/create", model);
+        ModelAndView modelAndView = new ModelAndView("clients/create");
+        modelAndView.addObject("client", new ClientForm());
+        return modelAndView;
     }
 
     @PostMapping("/create")

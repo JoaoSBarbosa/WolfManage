@@ -1,5 +1,6 @@
 package com.joaobarbosadev.WolfManage.web.client.dtos;
 
+import com.joaobarbosadev.WolfManage.core.enums.States;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -18,7 +19,7 @@ public class ClientViewModel {
     private String address;
     private String addressNumber;
     private String city;
-    private String state;
+    private States state;
     private String neighbourhood;
 
 

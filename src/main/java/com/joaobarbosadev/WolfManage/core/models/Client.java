@@ -3,6 +3,7 @@ import com.fasterxml.jackson.databind.PropertyNamingStrategies;
 import com.fasterxml.jackson.databind.annotation.JsonNaming;
 import com.joaobarbosadev.WolfManage.core.abstractions.Auditable;
 import com.joaobarbosadev.WolfManage.core.enums.Country;
+import com.joaobarbosadev.WolfManage.core.enums.States;
 import jakarta.persistence.*;
 import lombok.*;
 
@@ -23,7 +24,7 @@ public class Client extends Auditable {
     private String name;
     @Column(unique = true)
     private String email;
-    @Column(name = "telefone", length = 11, nullable = false, unique = true)
+    @Column(name = "telefone", length = 15, nullable = false, unique = true)
     private String phone;
     @Column(name = "endereco")
     private String address;
@@ -32,7 +33,8 @@ public class Client extends Auditable {
     @Column(name = "cidade")
     private String city;
     @Column(name = "uf", length = 2)
-    private String state;
+    @Enumerated(EnumType.STRING)
+    private States state;
     @Column(name = "cep")
     private String zip;
     @Column(name = "pais")
