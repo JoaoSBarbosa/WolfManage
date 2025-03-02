@@ -1,71 +1,3 @@
-<!--<!doctype html>-->
-<!--<html lang="pt-BR">-->
-<!--<head>-->
-<!--    <meta charset="UTF-8">-->
-<!--    <meta name="viewport"-->
-<!--          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">-->
-<!--    <meta http-equiv="X-UA-Compatible" content="ie=edge">-->
-<!--    <title>Wolf Manage - Clientes</title>-->
-<!--    &lt;!&ndash;    Framework PICOCSS&ndash;&gt;-->
-<!--    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@picocss/pico@1.5.10/css/pico.min.css">-->
-<!--</head>-->
-<!--<body>-->
-<!--<nav class="container-fluid">-->
-<!--    <ul>-->
-<!--        <li><strong>Wolf Manage - </strong></li>-->
-<!--    </ul>-->
-<!--    <ul>-->
-<!--        <li><a href="#">Home</a></li>-->
-<!--    </ul>-->
-<!--</nav>-->
-<!--<main class="container-fluid">-->
-<!--    <h1>Lista de Clientes!</h1>-->
-<!--   <div class="overflow-auto">-->
-<!--       <table class="striped">-->
-<!--           <thead>-->
-<!--           <tr>-->
-<!--               <th scope="col">#</th>-->
-<!--               <th scope="col">Nome</th>-->
-<!--               <th scope="col">E-mail</th>-->
-<!--               <th scope="col">Telefone</th>-->
-<!--               <th scope="col">Rua</th>-->
-<!--               <th scope="col">Nº</th>-->
-<!--               <th scope="col">Bairro</th>-->
-<!--               <th scope="col">Cidade</th>-->
-<!--               <th scope="col">UF</th>-->
-<!--               <th scope="col">Ação</th>-->
-
-<!--           </tr>-->
-<!--           </thead>-->
-<!--           <tbody>-->
-<!--           <tr th:each="client : ${clients}">-->
-<!--               <th scope="row" th:text="${client.id}">1</th>-->
-<!--               <td th:text="${client.name}">João</td>-->
-<!--               <td th:text="${client.email}">contato@barbosacode.com</td>-->
-<!--               <td th:text="${client.getPhoneFormat}">(11) 9 99453-7464</td>-->
-<!--               <td th:text="${client.address}">Av. Industrial Primeira</td>-->
-<!--               <td th:text="${client.addressNumber}">103</td>-->
-<!--               <td th:text="${client.neighbourhood}">Jardim Itapuã</td>-->
-<!--               <td th:text="${client.city}">Itaquaquecetuba</td>-->
-<!--               <td th:text="${client.state}">UF</td>-->
-<!--               <td class="flex-box">-->
-<!--                   <button class="outline">-->
-<!--                       Editar-->
-<!--                   </button>-->
-<!--                   <button class="contrast">-->
-<!--                       Excluir-->
-<!--                   </button>-->
-<!--               </td>-->
-
-<!--           </tr>-->
-<!--           </tbody>-->
-<!--       </table>-->
-<!--   </div>-->
-<!--    <a href="/" role="button">Novo cliente</a>-->
-<!--</main>-->
-<!--</body>-->
-<!--</html>-->
-
 <!doctype html>
 <html lang="pt-BR">
 <head>
@@ -174,7 +106,7 @@
     <h1 class="mb-3 text-center">Lista de Clientes</h1>
     <!-- Botão para novo cliente -->
     <div class="d-flex justify-content-end w-100 py-3 my-1">
-        <a href="@{/clients/create}" class="btn btn-primary">Novo Cliente</a>
+        <a th:href="@{/clients/create}" class="btn btn-primary">Novo Cliente</a>
     </div>
     <!-- Tabela Responsiva -->
     <div class="table-container table-responsive">
@@ -236,6 +168,11 @@
     </div>
 </div>
 
+<!-- Formulário oculto para exclusão -->
+<form id="delete-form" method="post" style="display: none;">
+    <input type="hidden" name="_method" value="delete">
+</form>
+
 <script>
     function openModal(button) {
         const clientId = button.getAttribute("data-id");
@@ -245,10 +182,36 @@
         document.getElementById('edit-link').href = `/clients/edit/${clientId}`;
         document.getElementById('delete-link').href = `/clients/delete/${clientId}`;
 
+        const deleteForm = document.getElementById('delete-form');
+        deleteForm.action = `/clients/delete/${clientId}`;
+
+        document.getElementById('delete-form').onclick - function ( event){
+            event.preventDefault();
+            deleteForm.submit();
+        }
         var modal = new bootstrap.Modal(document.getElementById('modal'));
         modal.show();
+
+        // const clientId = button.getAttribute("data-id");
+        // const clientName = button.getAttribute("data-name");
+        //
+        // document.getElementById('modal-content').innerText = `O que deseja fazer com o cliente '${clientName}'?`;
+        // document.getElementById('edit-link').href = `/clients/edit/${clientId}`;
+        //
+        // // Configurar exclusão via formulário
+        // const deleteForm = document.getElementById('delete-form');
+        // deleteForm.action = `/clients/delete/${clientId}`;
+        //
+        // document.getElementById('delete-link').onclick = function (event) {
+        //     event.preventDefault(); // Impede o comportamento padrão do link
+        //     deleteForm.submit(); // Envia o formulário para excluir
+        // };
+        //
+        // var modal = new bootstrap.Modal(document.getElementById('modal'));
+        // modal.show();
     }
 </script>
 
 </body>
 </html>
+

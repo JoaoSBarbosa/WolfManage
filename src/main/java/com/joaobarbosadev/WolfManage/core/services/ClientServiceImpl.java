@@ -5,6 +5,7 @@ import com.joaobarbosadev.WolfManage.core.repositories.ClientRepository;
 import com.joaobarbosadev.WolfManage.web.client.dtos.ClientForm;
 import com.joaobarbosadev.WolfManage.web.client.dtos.ClientViewModel;
 import com.joaobarbosadev.WolfManage.web.client.mappers.ClientMapper;
+import jakarta.persistence.EntityNotFoundException;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -20,7 +21,8 @@ public class ClientServiceImpl implements ClientService {
     private final ClientRepository clientRepository;
 
     private final ClientMapper clientMapper;
-    @Transactional( readOnly = true )
+
+    @Transactional(readOnly = true)
     public Page<Client> findAll(Pageable pageable) {
         return clientRepository.findAll(pageable);
     }
@@ -37,5 +39,25 @@ public class ClientServiceImpl implements ClientService {
     public ClientViewModel save(ClientForm form) {
         Client client = clientMapper.toClient(form);
         return clientMapper.toClientViewModel(clientRepository.save(client));
+    }
+
+    @Override
+    @Transactional
+    public void deleteById(Long id) {
+
+        try {
+            Client client = clientRepository.getReferenceById(id);
+            clientRepository.delete(client);
+        } catch (EntityNotFoundException e) {
+            throw new RuntimeException("Client with id " + id + " not found");
+        }
+
+    }
+
+    @Override
+    @Transactional( readOnly = true)
+    public ClientViewModel findById(Long id) {
+        var client = clientRepository.findById(id).orElseThrow(EntityNotFoundException::new);
+        return  clientMapper.toClientViewModel(client);
     }
 }

@@ -54,4 +54,18 @@ public class ClientController {
         clientService.save(form);
         return "redirect:/clients";
     }
+
+    @GetMapping("/delete/{clientId}")
+    public String delete(@PathVariable Long clientId) {
+        clientService.deleteById(clientId);
+        return "redirect:/clients";
+    }
+
+    @GetMapping("/edit/{clientId}")
+    public ModelAndView edit(@PathVariable Long clientId) {
+        var client = clientService.findById(clientId);
+        ModelAndView model = new ModelAndView("clients/create");
+        model.addObject("client", client);
+        return model;
+    }
 }

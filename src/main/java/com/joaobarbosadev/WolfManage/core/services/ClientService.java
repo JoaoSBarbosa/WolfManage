@@ -12,6 +12,8 @@ public interface ClientService {
 
     Page<Client> findAll(Pageable pageable);
     List<ClientViewModel> findAll();
-
     ClientViewModel save(ClientForm form);
+    void deleteById(Long id);
+    ClientViewModel findById(Long id);
+
 }
