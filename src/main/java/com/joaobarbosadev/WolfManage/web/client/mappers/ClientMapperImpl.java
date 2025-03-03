@@ -27,7 +27,7 @@ public class ClientMapperImpl implements ClientMapper {
 
     @Override
     public Client toClient(ClientForm form) {
-        if(form == null) return null;
+        if (form == null) return null;
 
         return Client.builder()
                 .email(form.getEmail())
@@ -42,5 +42,23 @@ public class ClientMapperImpl implements ClientMapper {
                 .build();
 
 
+    }
+
+    @Override
+    public ClientForm toClientForm(Client client) {
+        if (client == null) return null;
+
+        return ClientForm.builder()
+                .email(client.getEmail())
+                .name(client.getName())
+                .city(client.getCity())
+                .state(client.getState())
+                .neighbourhood(client.getNeighbourhood())
+                .address(client.getAddress())
+                .addressNumber(client.getAddressNumber())
+                .phone(client.getPhone())
+                .country(client.getCountry())
+                .id(client.getId())
+                .build();
     }
 }

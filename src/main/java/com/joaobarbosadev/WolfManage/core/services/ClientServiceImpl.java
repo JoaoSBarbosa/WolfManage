@@ -56,8 +56,33 @@ public class ClientServiceImpl implements ClientService {
 
     @Override
     @Transactional( readOnly = true)
-    public ClientViewModel findById(Long id) {
+    public ClientForm findById(Long id) {
         var client = clientRepository.findById(id).orElseThrow(EntityNotFoundException::new);
-        return  clientMapper.toClientViewModel(client);
+        return  clientMapper.toClientForm(client);
+    }
+
+    @Override
+    @Transactional
+    public void update(Long clientId, ClientForm form) {
+
+        if(clientId == null){
+            throw new RuntimeException("Client id is null");
+        }
+        try {
+            Client client = clientRepository.getReferenceById(clientId);
+
+            if ( form.getAddress() != null ) client.setAddress(form.getAddress());
+            if ( form.getEmail() != null ) client.setEmail(form.getEmail());
+            if ( form.getName() != null ) client.setName(form.getName());
+            if ( form.getPhone() != null ) client.setPhone(form.getPhone());
+            if ( form.getCity() != null ) client.setCity(form.getCity());
+            if ( form.getState() != null ) client.setState(form.getState());
+            if ( form.getCountry() != null ) client.setCountry(form.getCountry());
+            if ( form.getAddressNumber() != null ) client.setAddressNumber(form.getAddressNumber());
+            if ( form.getNeighbourhood() != null) client.setNeighbourhood(form.getNeighbourhood());
+            clientRepository.save(client);
+        }catch (EntityNotFoundException e) {
+            throw new RuntimeException("Cliente com ID " + clientId + " não encontrado");
+        }
     }
 }

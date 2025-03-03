@@ -14,6 +14,7 @@ public interface ClientService {
     List<ClientViewModel> findAll();
     ClientViewModel save(ClientForm form);
     void deleteById(Long id);
-    ClientViewModel findById(Long id);
+    ClientForm findById(Long id);
+    void update(Long clientId, ClientForm form);
 
 }

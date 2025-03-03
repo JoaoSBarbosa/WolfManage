@@ -33,17 +33,6 @@ public class ClientController {
 
     @GetMapping("/create")
     public ModelAndView create() {
-        var clientForm = new ClientForm(
-                "João Barbosa",
-                "contato@barbosa.com",
-                "11998585858",
-                "Avenida Industrial primeira",
-                "52",
-                "São Paulo",
-                States.SP,
-                "Vila Prudente",
-                Country.BRAZIL
-        );
         ModelAndView modelAndView = new ModelAndView("clients/create");
         modelAndView.addObject("client", new ClientForm());
         return modelAndView;
@@ -61,11 +50,18 @@ public class ClientController {
         return "redirect:/clients";
     }
 
+
     @GetMapping("/edit/{clientId}")
     public ModelAndView edit(@PathVariable Long clientId) {
         var client = clientService.findById(clientId);
-        ModelAndView model = new ModelAndView("clients/create");
-        model.addObject("client", client);
+        ModelAndView model = new ModelAndView("clients/edit");
+        model.addObject("clientForm", client);
         return model;
+    }
+
+    @PostMapping("/edit/{clientId}")
+    public String edit(@PathVariable Long clientId, @ModelAttribute("clientForm") ClientForm form) {
+        clientService.update(clientId, form);
+        return "redirect:/clients";
     }
 }
