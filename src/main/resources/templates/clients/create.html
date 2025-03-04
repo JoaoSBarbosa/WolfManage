@@ -25,7 +25,7 @@
         }
 
         .form-container-container {
-            height: calc(100vh - 80px);
+            height: calc(100vh - 160px);
         }
 
         .form-container-section {
@@ -127,6 +127,7 @@
         </form>
     </section>
 </main>
+<div th:replace="~{fragments/_footer :: footer}"></div>
 
 <script>
     document.getElementById('phone').addEventListener('input', function (e){
