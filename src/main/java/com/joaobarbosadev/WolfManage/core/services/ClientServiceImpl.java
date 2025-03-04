@@ -13,6 +13,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
+import java.util.NoSuchElementException;
 import java.util.stream.Collectors;
 
 @Service
@@ -44,20 +45,18 @@ public class ClientServiceImpl implements ClientService {
     @Override
     @Transactional
     public void deleteById(Long id) {
-
         try {
             Client client = clientRepository.getReferenceById(id);
             clientRepository.delete(client);
         } catch (EntityNotFoundException e) {
-            throw new RuntimeException("Client with id " + id + " not found");
+            throw new NoSuchElementException("Client with id " + id + " not found");
         }
-
     }
 
     @Override
     @Transactional( readOnly = true)
     public ClientForm findById(Long id) {
-        var client = clientRepository.findById(id).orElseThrow(EntityNotFoundException::new);
+        var client = clientRepository.findById(id).orElseThrow(NoSuchElementException::new);
         return  clientMapper.toClientForm(client);
     }
 
@@ -65,7 +64,7 @@ public class ClientServiceImpl implements ClientService {
     @Transactional
     public void update(Long clientId, ClientForm form) {
         if(clientId == null) throw new RuntimeException("Client id is null");
-        if(!clientRepository.existsById(clientId))throw new RuntimeException("Cliente com ID " + clientId + " não encontrado");
+        if(!clientRepository.existsById(clientId))throw new NoSuchElementException("Cliente com ID " + clientId + " não encontrado");
         form.setId(clientId);
         clientRepository.save(clientMapper.toClient(form));
     }
