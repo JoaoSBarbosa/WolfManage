@@ -23,7 +23,6 @@ public class ClientController {
 
     private final ClientService clientService;
 
-    private final ClientRepository clientRepository;
     @GetMapping
     public ModelAndView index(){
         var clients = clientService.findAll();

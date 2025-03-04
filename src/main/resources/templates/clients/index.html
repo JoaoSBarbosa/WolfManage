@@ -48,12 +48,12 @@
             height: calc(100vh - 170px);
         }
         .form-container-section {
-            max-width: 1200px;
+            max-width: 1400px;
             padding: 10px;
             margin: 0 auto;
         }
         .div-container{
-            max-height: 700px;
+            max-height: 600px;
             overflow: auto;
         }
         /* Modal */
@@ -87,12 +87,13 @@
                     <th>Nome</th>
                     <th>E-mail</th>
                     <th>Telefone</th>
+                    <th>CEP</th>
                     <th>Rua</th>
                     <th>Nº</th>
                     <th>Bairro</th>
                     <th>Cidade</th>
                     <th>UF</th>
-                    <th>Ação</th>
+                    <th></th>
                 </tr>
                 </thead>
                 <tbody>
@@ -101,6 +102,7 @@
                     <td th:text="${client.name}">João</td>
                     <td th:text="${client.email}">contato@barbosacode.com</td>
                     <td th:text="${client.getPhoneFormat}">(11) 9 99453-7464</td>
+                    <td th:text="${client.zip}">CEP</td>
                     <td th:text="${client.address}">Av. Industrial Primeira</td>
                     <td th:text="${client.addressNumber}">103</td>
                     <td th:text="${client.neighbourhood}">Jardim Itapuã</td>

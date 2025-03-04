@@ -22,6 +22,7 @@ public class ClientMapperImpl implements ClientMapper {
         clientViewModel.setAddress(client.getAddress());
         clientViewModel.setAddressNumber(client.getAddressNumber());
         clientViewModel.setPhone(getPhoneFormat(client.getPhone()));
+        clientViewModel.setZip(getZipCodeFormat(client.getZip()));
         return clientViewModel;
     }
 
@@ -30,6 +31,7 @@ public class ClientMapperImpl implements ClientMapper {
         if (form == null) return null;
 
         return Client.builder()
+                .id(form.getId())
                 .email(form.getEmail())
                 .name(form.getName())
                 .city(form.getCity())
@@ -37,11 +39,10 @@ public class ClientMapperImpl implements ClientMapper {
                 .neighbourhood(form.getNeighbourhood())
                 .address(form.getAddress())
                 .addressNumber(form.getAddressNumber())
-                .phone(cleanPhoneFormat(form.getPhone()))
+                .phone(cleanNumberFormat(form.getPhone()))
                 .country(form.getCountry())
+                .zip( cleanNumberFormat(form.getZip()))
                 .build();
-
-
     }
 
     @Override
@@ -59,6 +60,7 @@ public class ClientMapperImpl implements ClientMapper {
                 .phone(getPhoneFormat(client.getPhone()))
                 .country(client.getCountry())
                 .id(client.getId())
+                .zip(getZipCodeFormat(client.getZip()))
                 .build();
     }
 
@@ -69,8 +71,16 @@ public class ClientMapperImpl implements ClientMapper {
     }
 
     @Override
-    public String cleanPhoneFormat(String phone) {
-        if (phone == null) return null;
-        return phone.replaceAll("[^0-9]","");
+    public String cleanNumberFormat(String stringNumber) {
+        if (stringNumber == null) return null;
+        return stringNumber.replaceAll("[^0-9]","");
     }
+
+    @Override
+    public String getZipCodeFormat(String zipCode) {
+        if (zipCode == null || zipCode.length() != 8) return zipCode;
+        return zipCode.replaceAll("(\\d{5})(\\d{3})", "$1-$2");
+    }
+
+
 }

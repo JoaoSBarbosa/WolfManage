@@ -21,6 +21,7 @@ public class ClientViewModel {
     private String city;
     private States state;
     private String neighbourhood;
+    private String zip;
 
 
     public String getPhoneFormat() {

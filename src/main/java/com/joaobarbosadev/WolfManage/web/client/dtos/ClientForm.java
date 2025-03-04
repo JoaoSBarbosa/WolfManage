@@ -22,4 +22,5 @@ public class ClientForm {
     private States state;
     private String neighbourhood;
     private Country country = Country.BRAZIL;
+    private String zip;
 }

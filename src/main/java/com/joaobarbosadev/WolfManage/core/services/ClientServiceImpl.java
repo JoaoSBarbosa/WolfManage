@@ -64,25 +64,9 @@ public class ClientServiceImpl implements ClientService {
     @Override
     @Transactional
     public void update(Long clientId, ClientForm form) {
-
-        if(clientId == null){
-            throw new RuntimeException("Client id is null");
-        }
-        try {
-            Client client = clientRepository.getReferenceById(clientId);
-
-            if ( form.getAddress() != null ) client.setAddress(form.getAddress());
-            if ( form.getEmail() != null ) client.setEmail(form.getEmail());
-            if ( form.getName() != null ) client.setName(form.getName());
-            if ( form.getPhone() != null ) client.setPhone(clientMapper.cleanPhoneFormat(form.getPhone()));
-            if ( form.getCity() != null ) client.setCity(form.getCity());
-            if ( form.getState() != null ) client.setState(form.getState());
-            if ( form.getCountry() != null ) client.setCountry(form.getCountry());
-            if ( form.getAddressNumber() != null ) client.setAddressNumber(form.getAddressNumber());
-            if ( form.getNeighbourhood() != null) client.setNeighbourhood(form.getNeighbourhood());
-            clientRepository.save(client);
-        }catch (EntityNotFoundException e) {
-            throw new RuntimeException("Cliente com ID " + clientId + " não encontrado");
-        }
+        if(clientId == null) throw new RuntimeException("Client id is null");
+        if(!clientRepository.existsById(clientId))throw new RuntimeException("Cliente com ID " + clientId + " não encontrado");
+        form.setId(clientId);
+        clientRepository.save(clientMapper.toClient(form));
     }
 }
