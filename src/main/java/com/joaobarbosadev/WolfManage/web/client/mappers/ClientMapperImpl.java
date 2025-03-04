@@ -37,7 +37,7 @@ public class ClientMapperImpl implements ClientMapper {
                 .neighbourhood(form.getNeighbourhood())
                 .address(form.getAddress())
                 .addressNumber(form.getAddressNumber())
-                .phone(form.getPhone())
+                .phone(cleanPhoneFormat(form.getPhone()))
                 .country(form.getCountry())
                 .build();
 
@@ -66,5 +66,11 @@ public class ClientMapperImpl implements ClientMapper {
     public String getPhoneFormat(String phone) {
         if (phone == null) return null;
         return phone.replaceAll("(\\d{2})(\\d{5})(\\d{4})", "($1) $2-$3");
+    }
+
+    @Override
+    public String cleanPhoneFormat(String phone) {
+        if (phone == null) return null;
+        return phone.replaceAll("[^0-9]","");
     }
 }

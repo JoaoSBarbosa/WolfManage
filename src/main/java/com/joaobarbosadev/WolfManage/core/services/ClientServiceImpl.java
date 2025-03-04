@@ -74,7 +74,7 @@ public class ClientServiceImpl implements ClientService {
             if ( form.getAddress() != null ) client.setAddress(form.getAddress());
             if ( form.getEmail() != null ) client.setEmail(form.getEmail());
             if ( form.getName() != null ) client.setName(form.getName());
-            if ( form.getPhone() != null ) client.setPhone(form.getPhone());
+            if ( form.getPhone() != null ) client.setPhone(clientMapper.cleanPhoneFormat(form.getPhone()));
             if ( form.getCity() != null ) client.setCity(form.getCity());
             if ( form.getState() != null ) client.setState(form.getState());
             if ( form.getCountry() != null ) client.setCountry(form.getCountry());
