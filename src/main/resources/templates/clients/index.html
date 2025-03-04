@@ -56,6 +56,15 @@
             max-height: 600px;
             overflow: auto;
         }
+        /* Corrigido para garantir que o sticky funcione */
+        .header_row_container {
+            position: sticky;
+            top: 0; /* Importante para fixar o elemento ao topo */
+            background-color: #333; /* Garantir que o fundo do header esteja fixo */
+            z-index: 2;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2); /* Sombra para dar destaque ao header fixo */
+        }
+
         /* Modal */
         .modal-content {
             background-color: #1f1f1f;
@@ -82,7 +91,7 @@
         <div class="table-container table-responsive div-container">
             <table class="table table-dark table-striped text-center">
                 <thead>
-                <tr>
+                <tr class="header_row_container">
                     <th>#</th>
                     <th>Nome</th>
                     <th>E-mail</th>
