@@ -1,7 +1,6 @@
-package com.joaobarbosadev.WolfManage.web.common.controller;
+package com.joaobarbosadev.WolfManage.web.common.handlers;
 
 import jakarta.persistence.EntityNotFoundException;
-import org.hibernate.query.sqm.EntityTypeException;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.servlet.ModelAndView;
@@ -11,7 +10,7 @@ import java.util.NoSuchElementException;
 
 
 @ControllerAdvice
-public class ErrorController {
+public class WebExceptionHandler {
 
     @ExceptionHandler(NoSuchElementException.class)
     public ModelAndView handleNoSuchElementException(NoSuchElementException e) {
