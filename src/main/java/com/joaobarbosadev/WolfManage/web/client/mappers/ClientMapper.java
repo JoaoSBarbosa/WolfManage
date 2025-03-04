@@ -9,4 +9,6 @@ public interface ClientMapper {
     ClientViewModel toClientViewModel(Client client);
     Client toClient(ClientForm form);
     ClientForm toClientForm(Client client);
+    String getPhoneFormat(String phone);
+
 }

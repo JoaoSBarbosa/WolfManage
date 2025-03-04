@@ -44,7 +44,14 @@
             font-size: 0.9rem;
             padding: 6px 12px;
         }
-
+        .form-container-container {
+            height: calc(100vh - 80px);
+        }
+        .form-container-section {
+            max-width: 800px;
+            padding: 10px;
+            margin: 0 auto;
+        }
         /* Modal */
         .modal-content {
             background-color: #1f1f1f;
@@ -59,48 +66,8 @@
 </head>
 <body>
 
-<!-- Navbar -->
-<!--<nav class="navbar navbar-dark">-->
-<!--    <div class="container-fluid">-->
-<!--        <a class="navbar-brand" href="#">Wolf Manage</a>-->
-<!--    </div>-->
-<!--    -->
-<!--</nav>-->
 
-
-<nav class="navbar navbar-expand-lg navbar-dark">
-    <div class="container-fluid">
-        <a class="navbar-brand" href="#">
-            <strong>Wolf Manage</strong>
-        </a>
-        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
-            <span class="navbar-toggler-icon"></span>
-        </button>
-        <div class="collapse navbar-collapse" id="navbarNavDropdown">
-            <ul class="navbar-nav">
-                <li class="nav-item">
-                    <a class="nav-link active" aria-current="page" href="#">Home</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="#">Menu 2</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="#">Menu 3</a>
-                </li>
-                <li class="nav-item dropdown">
-                    <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                        Dropdown link
-                    </a>
-                    <ul class="dropdown-menu">
-                        <li><a class="dropdown-item" href="#">Ação 1</a></li>
-                        <li><a class="dropdown-item" href="#">Ação 2</a></li>
-                        <li><a class="dropdown-item" href="#">Ação 3</a></li>
-                    </ul>
-                </li>
-            </ul>
-        </div>
-    </div>
-</nav>
+<div th:replace="~{fragments/_nav :: nav}"></div>
 <!-- Conteúdo -->
 <main class="container mt-4">
     <h1 class="mb-3 text-center">Lista de Clientes</h1>
@@ -109,7 +76,7 @@
         <a th:href="@{/clients/create}" class="btn btn-primary">Novo Cliente</a>
     </div>
     <!-- Tabela Responsiva -->
-    <div class="table-container table-responsive">
+    <div class="table-container table-responsive form-container-container">
         <table class="table table-dark table-striped text-center">
             <thead>
             <tr>
@@ -191,24 +158,6 @@
         }
         var modal = new bootstrap.Modal(document.getElementById('modal'));
         modal.show();
-
-        // const clientId = button.getAttribute("data-id");
-        // const clientName = button.getAttribute("data-name");
-        //
-        // document.getElementById('modal-content').innerText = `O que deseja fazer com o cliente '${clientName}'?`;
-        // document.getElementById('edit-link').href = `/clients/edit/${clientId}`;
-        //
-        // // Configurar exclusão via formulário
-        // const deleteForm = document.getElementById('delete-form');
-        // deleteForm.action = `/clients/delete/${clientId}`;
-        //
-        // document.getElementById('delete-link').onclick = function (event) {
-        //     event.preventDefault(); // Impede o comportamento padrão do link
-        //     deleteForm.submit(); // Envia o formulário para excluir
-        // };
-        //
-        // var modal = new bootstrap.Modal(document.getElementById('modal'));
-        // modal.show();
     }
 </script>
 

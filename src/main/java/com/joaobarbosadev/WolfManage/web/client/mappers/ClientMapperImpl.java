@@ -21,7 +21,7 @@ public class ClientMapperImpl implements ClientMapper {
         clientViewModel.setNeighbourhood(client.getNeighbourhood());
         clientViewModel.setAddress(client.getAddress());
         clientViewModel.setAddressNumber(client.getAddressNumber());
-        clientViewModel.setPhone(client.getPhone());
+        clientViewModel.setPhone(getPhoneFormat(client.getPhone()));
         return clientViewModel;
     }
 
@@ -56,9 +56,15 @@ public class ClientMapperImpl implements ClientMapper {
                 .neighbourhood(client.getNeighbourhood())
                 .address(client.getAddress())
                 .addressNumber(client.getAddressNumber())
-                .phone(client.getPhone())
+                .phone(getPhoneFormat(client.getPhone()))
                 .country(client.getCountry())
                 .id(client.getId())
                 .build();
+    }
+
+    @Override
+    public String getPhoneFormat(String phone) {
+        if (phone == null) return null;
+        return phone.replaceAll("(\\d{2})(\\d{5})(\\d{4})", "($1) $2-$3");
     }
 }
